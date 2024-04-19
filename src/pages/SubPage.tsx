@@ -12,7 +12,7 @@ const SubPage = () => {
                 fontSize: 20,
                 fontWeight: 700
             }}>
-                SubPasge
+                SubPage
             </p>
         </div>
     )
