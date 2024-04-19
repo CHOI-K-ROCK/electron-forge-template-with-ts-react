@@ -1,4 +1,5 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron';
+import { setBrowserMenu } from './menu';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -17,12 +18,15 @@ const createWindow = (): void => {
     mainWindow = new BrowserWindow({
         height: 600,
         width: 800,
-        autoHideMenuBar : true,
+        autoHideMenuBar: true,
         webPreferences: {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
             nodeIntegration: true,
         },
     });
+
+    //? 메뉴 세팅
+    setBrowserMenu(mainWindow);
 
     //? ================================================================
     // preload 에서 설정한 invoke 이벤트 작성
@@ -36,8 +40,8 @@ const createWindow = (): void => {
     // URL 로드
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-    // 개발자 도구 열기 (실제 패키징 시 비활성화 필요)
-    mainWindow.webContents.openDevTools();
+    // 개발 환경인 경우 개발자 도구 열기
+    (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') && mainWindow.webContents.openDevTools();
 };
 
 
