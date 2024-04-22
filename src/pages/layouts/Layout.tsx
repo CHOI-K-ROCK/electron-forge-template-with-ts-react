@@ -5,7 +5,7 @@ interface Props {
 }
 
 
-const MainLayout = (props: Props) => {
+const Layout = (props: Props) => {
     const { children } = props;
 
     return (
@@ -35,4 +35,4 @@ const MainLayout = (props: Props) => {
     );
 };
 
-export default MainLayout;
+export default Layout;

@@ -3,24 +3,24 @@ import { useRoutes } from "react-router-dom";
 
 import MainPage from '../pages/MainPage';
 import SubPage from '../pages/SubPage';
-import MainLayout from '../pages/layouts/Layout';
+import Layout from '../pages/layouts/Layout';
 
 const Router = () => {
     return useRoutes([
         {
             path: '/',
             element: (
-                <MainLayout>
+                <Layout>
                     <MainPage />
-                </MainLayout>
+                </Layout>
             )
         },
         {
             path: 'sub',
             element: (
-                <MainLayout>
+                <Layout>
                     <SubPage />
-                </MainLayout>
+                </Layout>
             )
         }
     ])
