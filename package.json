@@ -1,8 +1,8 @@
 {
-  "name": "electron-template-exam",
-  "productName": "electron-template-exam",
+  "name": "electron-template-with-ts-react",
+  "productName": "electron-template-with-ts-react",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Template for build app by electron with ts / react ",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
