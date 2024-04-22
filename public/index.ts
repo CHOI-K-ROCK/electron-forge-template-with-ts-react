@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron';
 import { setBrowserMenu } from './menu';
+import { InvokeChannels, InvokeHandleDataType } from '../src/@types/bridge';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -25,22 +26,37 @@ const createWindow = (): void => {
         },
     });
 
-    //? 메뉴 세팅
+    //메뉴 세팅
     setBrowserMenu(mainWindow);
 
-    //? ================================================================
-    // preload 에서 설정한 invoke 이벤트 작성
+    // invoke 로 사용될 channel - listener 연결
+    const registInvokeAction = (datas: InvokeHandleDataType[]) => {
 
-    ipcMain.handle("toggleFullscreen", () => {
-        return mainWindow.setFullScreen(!mainWindow.isFullScreen());
-    });
+        datas.forEach((data) => {
+            const { channel, listener } = data;
+            ipcMain.handle(channel, listener);
+        })
+    };
 
-    //? ================================================================
+    const INVOKE_ACTIONS: InvokeHandleDataType[] = [
+        {
+            channel: "TOGGLE_FULL_SCREEN",
+            listener: () => mainWindow.setFullScreen(!mainWindow.isFullScreen())
+        },
+        {
+            channel: "CLOSE_APP",
+            listener: () => app.quit()
+        }
+    ];
+
+    registInvokeAction(INVOKE_ACTIONS);
 
     // URL 로드
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
     // 개발 환경인 경우 개발자 도구 열기
+    //! 개발자 도구 여는 경우 "Request Autofill.enable failed" 에러 발생하나, 
+    //! 실 개발 및 동작에는 영향으 주지 않는 것으로 보임.
     (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') && mainWindow.webContents.openDevTools();
 };
 

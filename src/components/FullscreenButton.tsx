@@ -1,17 +1,14 @@
 import React from 'react';
-import { CustomWindow } from '../@types/window';
+import { invoke } from '../utils/bridge';
 
-declare let window: CustomWindow; // window 객체 타입 오류 수정
 
 const FullscreenButton = () => {
-    async function handleClick() {
-        window.bridge.invoke('toggleFullscreen');
-    }
+    const handleClick = () => {
+        invoke("TOGGLE_FULL_SCREEN");
+    };
 
     return (
-        <>
-            <button onClick={handleClick}>toggleFullscreen</button>
-        </>
+        <button onClick={handleClick}>toggleFullscreen</button>
     );
 };
 
