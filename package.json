@@ -1,8 +1,8 @@
 {
-  "name": "electron-template-with-ts-react",
-  "productName": "electron-template-with-ts-react",
+  "name": "electron-forge-template-with-ts-react",
+  "productName": "electron-forge-template-with-ts-react",
   "version": "1.0.0",
-  "description": "Template for build app by electron with ts / react ",
+  "description": "Template for build app by electron forge with ts / react ",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
@@ -47,6 +47,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "styled-reset": "^4.5.2"
   }
 }

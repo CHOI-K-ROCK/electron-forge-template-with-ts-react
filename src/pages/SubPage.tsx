@@ -6,8 +6,11 @@ const SubPage = () => {
 
     return (
         <div>
-            <button onClick={() => navigate(-1)}>go back</button>
-
+            <div style={{
+                marginBottom: "15px"
+            }}>
+                <button onClick={() => navigate(-1)}>go back</button>
+            </div>
             <p style={{
                 fontSize: 20,
                 fontWeight: 700

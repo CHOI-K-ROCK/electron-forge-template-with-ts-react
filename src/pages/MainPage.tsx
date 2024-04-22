@@ -11,7 +11,8 @@ const MainPage = () => {
                 display : "flex",
                 flexDirection : "column",
                 alignItems : "flex-start",
-                gap : 15
+                gap : 15,
+                marginBottom : "15px"
             }}>
                 <FullscreenButton />
                 <button onClick={() => navigate("/sub")}>to SubPage</button>
